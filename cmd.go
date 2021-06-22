@@ -80,6 +80,7 @@ type Client interface {
 	ZScan(ctx context.Context, key string, cursor uint64, match string, count int64) *redis.ScanCmd
 	SMembers(ctx context.Context, key string) *redis.StringSliceCmd
 	SAdd(ctx context.Context, key string, members ...interface{}) *redis.IntCmd
+	SRem(ctx context.Context, key string, members ...interface{}) *redis.IntCmd
 	SetNX(ctx context.Context, key string, value interface{}, expiration time.Duration) *redis.BoolCmd
 	MSetNX(ctx context.Context, values ...interface{}) *redis.BoolCmd
 	AddHook(hook redis.Hook)

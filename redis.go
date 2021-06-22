@@ -526,6 +526,14 @@ func (s *splitClient) SAdd(ctx context.Context, key string, members ...interface
 	return cli.SAdd(ctx, key, members...)
 }
 
+func (s *splitClient) SRem(ctx context.Context, key string, members ...interface{}) *redis.IntCmd {
+	cli := s.splitter.Master()
+	if cli == nil {
+		return nil
+	}
+	return cli.SRem(ctx, key, members...)
+}
+
 func (s *splitClient) AddHook(hook redis.Hook) {
 	switch s.splitter.(type) {
 	case *ClusterSplit:
